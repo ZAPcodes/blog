@@ -4,22 +4,20 @@ import User from '../models/user.models.js';
 
 const router = express.Router();
 
-// Create a new post - GET route
+
 router.get('/new', (req, res) => {
     res.render('new-post');
 });
 
-// Create a new post - POST route
 router.post('/posts', async (req, res) => {
     try {
         const { caption, image } = req.body;
 
-        // Create a new post
+        
         const newPost = new Post({ caption, image });
         await newPost.save();
 
-        // Optionally, you could add some default user reference here if needed
-        // For example: await User.findByIdAndUpdate(defaultUserId, { $push: { posts: newPost._id } });
+        
 
         res.redirect('/');
     } catch (err) {
@@ -28,7 +26,7 @@ router.post('/posts', async (req, res) => {
     }
 });
 
-// View all posts - GET route
+
 router.get('/', async (req, res) => {
     try {
         const posts = await Post.find().exec();
@@ -39,7 +37,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Edit post - GET route
+
 router.get('/edit/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -53,14 +51,13 @@ router.get('/edit/:id', async (req, res) => {
     }
 });
 
-// Update post - POST route
+
 router.post('/update/:id', async (req, res) => {
     try {
         const { caption, image } = req.body;
         const postId = req.params.id;
 
-        // Update post
-        await Post.findByIdAndUpdate(postId, { caption, image });
+        ByIdAndUpdate(postId, { caption, image });
 
         res.redirect('/');
     } catch (err) {
@@ -69,7 +66,7 @@ router.post('/update/:id', async (req, res) => {
     }
 });
 
-// Delete post - POST route
+
 router.post('/delete/:id', async (req, res) => {
     try {
         const postId = req.params.id;
@@ -80,9 +77,6 @@ router.post('/delete/:id', async (req, res) => {
         }
 
         await Post.findByIdAndDelete(postId);
-
-        // Optionally, you could remove the post reference from a default user if needed
-        // For example: await User.findByIdAndUpdate(defaultUserId, { $pull: { posts: postId } });
 
         res.redirect('/');
     } catch (err) {
