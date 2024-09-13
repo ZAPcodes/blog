@@ -23,7 +23,7 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required:[treu, "Password is required"],
+        required:[true, "Password is required"],
     },
     profilePicture: {
         type: String,
@@ -38,6 +38,7 @@ const userSchema = new Schema({
         enum: ["male", "female", "other"],
         default: "other"
     }
+    
 
     
     
